@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Web Của Tôi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        nav {
+            background-color: #4CAF50;
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background-color: #45a049;
+        }
+        .content {
+            padding: 20px;
+        }
+        .tab {
+            display: none;
+        }
+        .tab.active {
+            display: block;
+        }
+        .cv-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        input[type="text"], input[type="email"], input[type="tel"] {
+            margin: 10px 0;
+            padding: 10px;
+            width: calc(100% - 22px);
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .cv-item {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fafafa;
+            display: flex;
+            flex-direction: column;
+        }
+        .cv-item strong {
+            margin-bottom: 5px;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .search-container {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#home" onclick="showTab('home')">Home</a>
+    <a href="#about" onclick="showTab('about')">About</a>
+    <a href="#laps" onclick="showTab('laps')">Laps</a>
+</nav>
+
+<div class="content">
+    <div id="home" class="tab active">
+        <h1>Chào Mừng Đến Với Trang Web Của Tôi</h1>
+        <p>Đây là phần nội dung của trang chính.</p>
+    </div>
+    <div id="about" class="tab">
+        <h1>Giới Thiệu</h1>
+        <p>Đây là phần giới thiệu về trang web và nội dung của nó.</p>
+        <div class="sub-menu">
+            <a href="#" onclick="showCV()">CV</a>
+        </div>
+        <div id="cv" class="cv-container" style="display:none;">
+            <h2>Quản Lý CV</h2>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm theo tên" oninput="searchCV()">
+            </div>
+            <input type="text" id="nameInput" placeholder="Tên" required>
+            <input type="email" id="emailInput" placeholder="Email" required>
+            <input type="tel" id="phoneInput" placeholder="Số điện thoại" required>
+            <input type="text" id="addressInput" placeholder="Địa chỉ" required>
+            <input type="text" id="skillsInput" placeholder="Kỹ năng" required>
+            <input type="text" id="educationInput" placeholder="Học vấn" required>
+            <input type="text" id="certificatesInput" placeholder="Chứng chỉ" required>
+            <input type="text" id="projectsInput" placeholder="Dự án" required>
+            <input type="text" id="activitiesInput" placeholder="Hoạt động" required>
+            <input type="text" id="hobbiesInput" placeholder="Sở thích" required>
+            <input type="text" id="descriptionInput" placeholder="Mô tả" required>
+            <button onclick="addCV()">Thêm</button>
+            <div id="cvList"></div>
+        </div>
+    </div>
+    <div id="laps" class="tab">
+        <h1>Thông Tin Về Laps</h1>
+        <p>Chọn một trong các lab bên dưới:</p>
+        <div class="sub-menu">
+            <a href="#" onclick="showLab('lab1')">Lab 1</a>
+            <a href="#" onclick="showLab('lab2')">Lab 2</a>
+            <a href="#" onclick="showLab('lab3')">Lab 3</a>
+        </div>
+        <div id="lab1" class="lab" style="display:none;">
+            <h2>Lab 1</h2>
+            <p>Đây là nội dung của Lab 1.</p>
+        </div>
+        <div id="lab2" class="lab" style="display:none;">
+            <h2>Lab 2</h2>
+            <p>Đây là nội dung của Lab 2.</p>
+        </div>
+        <div id="lab3" class="lab" style="display:none;">
+            <h2>Lab 3</h2>
+            <p>Đây là nội dung của Lab 3.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showTab(tabName) {
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.classList.remove('active');
+        });
+        document.getElementById(tabName).classList.add('active');
+    }
+
+    function showLab(labName) {
+        const labs = document.querySelectorAll('.lab');
+        labs.forEach(lab => {
+            lab.style.display = 'none';
+        });
+        document.getElementById(labName).style.display = 'block';
+    }
+
+    function showCV() {
+        const cv = document.getElementById('cv');
+        cv.style.display = cv.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function addCV() {
+        const nameInput = document.getElementById('nameInput');
+        const emailInput = document.getElementById('emailInput');
+        const phoneInput = document.getElementById('phoneInput');
+        const addressInput = document.getElementById('addressInput');
+        const skillsInput = document.getElementById('skillsInput');
+        const educationInput = document.getElementById('educationInput');
+        const certificatesInput = document.getElementById('certificatesInput');
+        const projectsInput = document.getElementById('projectsInput');
+        const activitiesInput = document.getElementById('activitiesInput');
+        const hobbiesInput = document.getElementById('hobbiesInput');
+        const descriptionInput = document.getElementById('descriptionInput');
+        const cvList = document.getElementById('cvList');
+
+        const newItem = document.createElement('div');
+        newItem.classList.add('cv-item');
+        newItem.innerHTML = `
+            <strong>Tên:</strong> ${nameInput.value} <br>
+            <strong>Email:</strong> ${emailInput.value} <br>
+            <strong>Số điện thoại:</strong> ${phoneInput.value} <br>
+            <strong>Địa chỉ:</strong> ${addressInput.value} <br>
+            <strong>Kỹ năng:</strong> ${skillsInput.value} <br>
+            <strong>Học vấn:</strong> ${educationInput.value} <br>
+            <strong>Chứng chỉ:</strong> ${certificatesInput.value} <br>
+            <strong>Dự án:</strong> ${projectsInput.value} <br>
+            <strong>Hoạt động:</strong> ${activitiesInput.value} <br>
+            <strong>Sở thích:</strong> ${hobbiesInput.value} <br>
+            <strong>Mô tả:</strong> ${descriptionInput.value} <br>
+            <div class="button-group">
+                <button onclick="editCV(this)">Sửa</button>
+                <button onclick="deleteCV(this)">Xóa</button>
+            </div>
+        `;
+        cvList.appendChild(newItem);
+        clearInputs();
+    }
+
+    function clearInputs() {
+        document.getElementById('nameInput').value = '';
+        document.getElementById('emailInput').value = '';
+        document.getElementById('phoneInput').value = '';
+        document.getElementById('addressInput').value = '';
+        document.getElementById('skillsInput').value = '';
+        document.getElementById('educationInput').value = '';
+        document.getElementById('certificatesInput').value = '';
+        document.getElementById('projectsInput').value = '';
+        document.getElementById('activitiesInput').value = '';
+        document.getElementById('hobbiesInput').value = '';
+        document.getElementById('descriptionInput').value = '';
+    }
+
+    function editCV(button) {
+        const item = button.parentElement.parentElement;
+        const details = item.innerHTML.split('<div class="button-group">')[0].trim().split('<br>').map(detail => detail.replace(/<strong>|<\/strong>/g, '').trim());
+        
+        const inputs = details.map(detail => {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = detail.split(': ')[1];
+            return input;
+        });
+        
+        item.innerHTML = '';
+        inputs.forEach(input => item.appendChild(input));
+        
+        const saveButton = document.createElement('button');
+        saveButton.innerText = 'Lưu';
+        saveButton.onclick = function() {
+            const newDetails = inputs.map(input => `<strong>${input.placeholder}:</strong> ${input.value} <br>`).join('');
+            item.innerHTML = `${newDetails} <div class="button-group">
+                <button onclick="editCV(this)">Sửa</button> 
+                <button onclick="deleteCV(this)">Xóa</button>
+            </div>`;
+        };
+        item.appendChild(saveButton);
+    }
+
+    function deleteCV(button) {
+        const item = button.parentElement.parentElement;
+        item.remove();
+    }
+
+    function searchCV() {
+        const searchValue = document.getElementById('searchInput').value.toLowerCase();
+        const cvItems = document.querySelectorAll('.cv-item');
+
+        cvItems.forEach(item => {
+            const name = item.innerText.toLowerCase();
+            item.style.display = name.includes(searchValue) ? 'block' : 'none';
+        });
+    }
+</script>
+
+</body>
+</html>

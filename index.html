@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Web Của Tôi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #4CAF50;
+            padding: 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #45a049;
+        }
+        .content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#home" onclick="showTab('home')">Home</a>
+    <a href="#about" onclick="showTab('about')">About</a>
+    <a href="#laps" onclick="showTab('laps')">Laps</a>
+</nav>
+
+<div class="content">
+    <div id="home" class="tab">
+        <h1>Chào Mừng Đến Với Trang Web Của Tôi</h1>
+        <p>Đây là phần nội dung của trang chính.</p>
+    </div>
+    <div id="about" class="tab" style="display:none;">
+        <h1>Giới Thiệu</h1>
+        <p>Đây là phần giới thiệu về trang web và nội dung của nó.</p>
+    </div>
+    <div id="laps" class="tab" style="display:none;">
+        <h1>Thông Tin Về Laps</h1>
+        <p>Đây là phần thông tin chi tiết về Laps.</p>
+    </div>
+</div>
+
+<script>
+    function showTab(tabName) {
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.style.display = 'none';
+        });
+        document.getElementById(tabName).style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
